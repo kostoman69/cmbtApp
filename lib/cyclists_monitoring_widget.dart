@@ -7,7 +7,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
           Stack(
             children: <Widget>[
               IconButton(
@@ -36,7 +36,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
           Stack(
             children: <Widget>[
               IconButton(
@@ -65,7 +65,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 1.0),
           Row(
             children: <Widget>[
               IconButton(

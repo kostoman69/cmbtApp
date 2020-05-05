@@ -44,57 +44,76 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey[800],
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'images/cmbt.png',
-              fit: BoxFit.contain,
-              height: 60,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBarWithHeight(
+          height: 100.0,
+        ),
+
+        body: Container(
+          alignment: Alignment.center,
+          child: _pageOptions[_selectedTab],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedTab,
+          iconSize: 36.0,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blueGrey[800],
+          onTap: (int index) {
+            setState(() {
+              _selectedTab = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Monitoring'),
             ),
-            Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.title,
-                  style: TextStyle(fontSize: 17.0),
-                ))
+            BottomNavigationBarItem(
+              icon: Icon(Icons.category),
+              title: Text('Cmbt News'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              title: Text('Contact'),
+            ),
           ],
         ),
+        // This trailing comma makes auto-formatting nicer for build methods.
       ),
-
-      body: Container(
-        alignment: Alignment.center,
-        child: _pageOptions[_selectedTab],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTab,
-        iconSize: 36.0,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blueGrey[800],
-        onTap: (int index) {
-          setState(() {
-            _selectedTab = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Monitoring'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            title: Text('Cmbt News'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text('Contact'),
-          ),
-        ],
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class AppBarWithHeight extends StatelessWidget implements PreferredSizeWidget {
+  final double height;
+
+  const AppBarWithHeight({Key key, @required this.height}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blueGrey[800],
+      padding: EdgeInsets.all(5.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'images/cmbt.png',
+            fit: BoxFit.contain,
+            height: 90,
+          ),
+          Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Cretan Mountain Bike Trails',
+                style: TextStyle(fontSize: 17.0),
+              ))
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(height);
 }
