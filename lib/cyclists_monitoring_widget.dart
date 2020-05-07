@@ -12,7 +12,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: Image.asset('images/liveview.jpg'),
-                iconSize: 180,
+                iconSize: 160,
                 onPressed: () => null,
               ),
               Positioned.fill(
@@ -41,7 +41,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: Image.asset('images/liverankings.jpg'),
-                iconSize: 180,
+                iconSize: 170,
                 onPressed: () => null,
               ),
               Positioned.fill(

@@ -1,4 +1,4 @@
-package com.example.cmbt
+package gr.cmbt
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
