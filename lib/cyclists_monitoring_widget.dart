@@ -2,6 +2,8 @@ import 'package:cmbt/screens/web_screen.dart';
 import 'package:flutter/material.dart';
 
 class CyclistsMonitoringWidget extends StatelessWidget {
+  final String traccarURI = 'http://live.tourofcrete.gr:8080/?locale=en&token=X3TKrvKtjZKZwF3OT3ehWM6sdKUkTdTT';
+  final String rankingURI = 'https://live.tourofcrete.gr/ranking/standings.php';
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -25,7 +27,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
                       print('liveview!');
                       Route route = MaterialPageRoute(
                         builder: (context) => WebScreen(
-                          url: 'http://live.tourofcrete.gr:8080/?locale=en&token=WzGsIqGEdUdfARM6STgAMa6cExf5ZSpi',
+                          url: traccarURI,
                           title: 'Live View',
                         ),
                       );
@@ -54,7 +56,7 @@ class CyclistsMonitoringWidget extends StatelessWidget {
                       print('liveview!');
                       Route route = MaterialPageRoute(
                         builder: (context) => WebScreen(
-                          url: 'http://live.tourofcrete.gr/ranking/standings.php',
+                          url: rankingURI,
                           title: 'Rankings',
                         ),
                       );
