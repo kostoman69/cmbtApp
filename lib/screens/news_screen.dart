@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
-class NewsWidget extends StatelessWidget {
+class NewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,23 +61,36 @@ Widget _postTile(String message, String imageURL) => IntrinsicHeight(
 ListView _postsListView(data) {
   return ListView.builder(
       itemCount: data.length,
-      itemBuilder: (context, index) => _postTile(data[index].message == null ? " " : data[index].message, data[index].fullPicture == null ? " " : data[index].fullPicture));
+      itemBuilder: (context, index) => _postTile(
+          data[index].message == null ? " " : data[index].message,
+          data[index].fullPicture == null ? " " : data[index].fullPicture));
 }
 
 class _PostsListViewState extends State<PostsListView> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Post>>(
-      future: _fetchPosts(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<Post> data = snapshot.data;
-          return _postsListView(data.where((p) => p.fullPicture != null && p.message != null).toList());
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
-        }
-        return CircularProgressIndicator();
-      },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Live race monitoring'),
+        ),
+        body: FutureBuilder<List<Post>>(
+          future: _fetchPosts(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Post> data = snapshot.data;
+              return _postsListView(data
+                  .where((p) => p.fullPicture != null && p.message != null)
+                  .toList());
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+      ),
     );
   }
 }

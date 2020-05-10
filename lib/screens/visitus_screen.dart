@@ -28,6 +28,31 @@ final _imageUrls = [
 ];
 
 final _imageDescriptions = [
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
+
+final _imageDescriptions2 = [
   'Το όνειρο',
   'Η πρόκληση',
   'Δύναμη',
@@ -52,12 +77,12 @@ final _imageDescriptions = [
   'Απέραντο',
 ];
 
-class ContactsWidget extends StatefulWidget {
+class VisitUsScreen extends StatefulWidget {
   @override
-  _ContactsWidgetState createState() => _ContactsWidgetState();
+  _VisitUsScreenState createState() => _VisitUsScreenState();
 }
 
-class _ContactsWidgetState extends State<ContactsWidget> {
+class _VisitUsScreenState extends State<VisitUsScreen> {
   //Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
 
@@ -105,7 +130,12 @@ class _ContactsWidgetState extends State<ContactsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  SafeArea(
+      child:  Scaffold(
+          appBar: AppBar(
+            title: Text('Live race monitoring'),
+          ),
+          body:Container(
       // color: Colors.blueGrey,
       child: Column(
         children: <Widget>[
@@ -154,6 +184,8 @@ class _ContactsWidgetState extends State<ContactsWidget> {
             ),
           ),
         ],
+      ),
+          ),
       ),
     );
   }
