@@ -72,7 +72,11 @@ class _PostsListViewState extends State<PostsListView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Live race monitoring'),
+          title: Text('News'),
+          leading: IconButton(
+            icon: Image.asset('images/cmbt.png'), 
+            onPressed: () { },
+          ),
         ),
         body: FutureBuilder<List<Post>>(
           future: _fetchPosts(),

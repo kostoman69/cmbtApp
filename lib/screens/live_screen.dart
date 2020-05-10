@@ -13,6 +13,10 @@ class LiveScreen extends StatelessWidget {
       child:  Scaffold(
           appBar: AppBar(
             title: Text('Live race monitoring'),
+            leading: IconButton(
+            icon: Image.asset('images/cmbt.png'), 
+            onPressed: () { },
+          ),
           ),
           body: SingleChildScrollView(
       child: Column(

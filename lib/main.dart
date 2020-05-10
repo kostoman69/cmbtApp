@@ -1,9 +1,11 @@
+import 'package:cmbt/screens/gallery_screen.dart';
 import 'package:cmbt/screens/home_screen.dart';
 import 'package:cmbt/screens/live_screen.dart';
+import 'package:cmbt/screens/location_screen.dart';
 import 'package:cmbt/screens/news_screen.dart';
-import 'package:cmbt/screens/visitus_screen.dart';
 import 'package:custom_navigator/custom_scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(CmbtApp());
 
@@ -42,11 +44,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final _items = [
-    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('home')),
-    BottomNavigationBarItem(icon: Icon(Icons.event), title: Text('live')),
-    BottomNavigationBarItem(icon: Icon(Icons.save_alt), title: Text('News')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.home), title: Text('home')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.route), title: Text('live')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.newspaper), title: Text('News')),
     BottomNavigationBarItem(
-        icon: Icon(Icons.save_alt), title: Text('Visit us')),
+        icon: FaIcon(FontAwesomeIcons.images), title: Text('Gallery')),
+        BottomNavigationBarItem(
+        icon: FaIcon(FontAwesomeIcons.mapMarkedAlt), title: Text('Location')),
   ];
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,8 @@ class _HomePageState extends State<HomePage> {
           HomeScreen(),
           LiveScreen(),
           NewsScreen(),
-          VisitUsScreen(),
+          GalleryScreen(),
+          LocationScreen()
         ],
 
         // Called when one of the [items] is tapped.
