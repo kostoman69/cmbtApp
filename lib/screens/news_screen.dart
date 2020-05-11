@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class PostsListView extends StatefulWidget {
 
 Future<List<Post>> _fetchPosts() async {
   final jobsListAPIUrl =
-      'https://graph.facebook.com/v7.0/me?fields=id,name,posts{full_picture,message}&access_token=EAADVjHZBuokEBAGLa86YfH2HZAdJ2f5d802G6ZCY5VPNWfhl3TyHYpjPV6Tv5dhZAMfcuZAeKaa9lvpwtmcDtXlWT1Xy4VitAoHV4WBgjcdZBVmcAw2YdKkLTZB43BYuhTlBzZCYz55CZCtsnem7nctnPkI796ZAVwfXa1BFaSoSEolHZC2NXF7R9xo';
+      'https://graph.facebook.com/v7.0/me?fields=id,name,link,posts{full_picture,message,permalink_url,created_time}&access_token=EAADVjHZBuokEBAGLa86YfH2HZAdJ2f5d802G6ZCY5VPNWfhl3TyHYpjPV6Tv5dhZAMfcuZAeKaa9lvpwtmcDtXlWT1Xy4VitAoHV4WBgjcdZBVmcAw2YdKkLTZB43BYuhTlBzZCYz55CZCtsnem7nctnPkI796ZAVwfXa1BFaSoSEolHZC2NXF7R9xo';
   final response = await http.get(jobsListAPIUrl);
 
   if (response.statusCode == 200) {
@@ -61,9 +63,62 @@ Widget _postTile(String message, String imageURL) => IntrinsicHeight(
 ListView _postsListView(data) {
   return ListView.builder(
       itemCount: data.length,
-      itemBuilder: (context, index) => _postTile(
-          data[index].message == null ? " " : data[index].message,
-          data[index].fullPicture == null ? " " : data[index].fullPicture));
+      itemBuilder: (context, index) => _postTile(data[index].message == null ? " " : data[index].message, data[index].fullPicture == null ? " " : data[index].fullPicture));
+}
+
+ListView _posts2ListView(data) {
+  return ListView.separated(
+    itemCount: data.length,
+    itemBuilder: (context, index) {
+      String message = data[index].message == null ? " " : data[index].message;
+      String imageURL = data[index].fullPicture == null ? " " : data[index].fullPicture;
+      String createdTime = data[index].createdTime;
+      String permalinkURL = data[index].permalinkURL;
+
+      return ListTile(
+        // leading: CircleAvatar(
+        //   backgroundImage: NetworkImage(imageURL),
+        // ),
+        leading: ClipRect(
+          child: Image.network(
+            imageURL,
+            width: 80,
+            height: 80,
+            fit: BoxFit.cover,
+          ),
+        ),
+        //Image.asset(profileImage, fit: BoxFit.cover),
+
+        title: Text(DateFormat('dd MMMM yyyy').format(DateTime.parse(createdTime))),
+        subtitle: Text(message),
+        //trailing: Icon(Icons.keyboard_arrow_right),
+        onTap: () async {
+          String fbProtocolUrl;
+          //if (Platform.isIOS) {
+          //  fbProtocolUrl = 'fb://profile/page_id';
+          //} else {
+          //          fbProtocolUrl = 'fb://page/page_id';
+          //}
+          //
+          //          String fallbackUrl = 'https://www.facebook.com/page_name';
+
+          try {
+            bool launched = await launch(permalinkURL, forceSafariVC: false);
+
+            // if (!launched) {
+            //   await launch(fallbackUrl, forceSafariVC: false);
+            // }
+          } catch (e) {
+            //await launch(fallbackUrl, forceSafariVC: false);
+          }
+        },
+        dense: false,
+      );
+    },
+    separatorBuilder: (context, index) {
+      return Divider();
+    },
+  );
 }
 
 class _PostsListViewState extends State<PostsListView> {
@@ -74,8 +129,8 @@ class _PostsListViewState extends State<PostsListView> {
         appBar: AppBar(
           title: Text('News'),
           leading: IconButton(
-            icon: Image.asset('assets/cmbt.png'), 
-            onPressed: () { },
+            icon: Image.asset('assets/cmbt.png'),
+            onPressed: () {},
           ),
         ),
         body: FutureBuilder<List<Post>>(
@@ -83,9 +138,7 @@ class _PostsListViewState extends State<PostsListView> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<Post> data = snapshot.data;
-              return _postsListView(data
-                  .where((p) => p.fullPicture != null && p.message != null)
-                  .toList());
+              return _posts2ListView(data.where((p) => p.fullPicture != null || p.message != null).toList());
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
@@ -102,13 +155,15 @@ class _PostsListViewState extends State<PostsListView> {
 class FacebookWall {
   String id;
   String name;
+  String link;
   Posts posts;
 
-  FacebookWall({this.id, this.name, this.posts});
+  FacebookWall({this.id, this.name, this.link, this.posts});
 
   FacebookWall.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    link = json['link'];
     posts = json['posts'] != null ? new Posts.fromJson(json['posts']) : null;
   }
 
@@ -116,6 +171,7 @@ class FacebookWall {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
+    data['link'] = this.link;
     if (this.posts != null) {
       data['posts'] = this.posts.toJson();
     }
@@ -149,13 +205,17 @@ class Posts {
 class Post {
   String message;
   String id;
+  String permalinkURL;
+  String createdTime;
   String fullPicture;
 
-  Post({this.message, this.id, this.fullPicture});
+  Post({this.message, this.id, this.fullPicture, this.permalinkURL, this.createdTime});
 
   Post.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     id = json['id'];
+    permalinkURL = json['permalink_url'];
+    createdTime = json['created_time'];
     fullPicture = json['full_picture'];
   }
 
@@ -163,6 +223,8 @@ class Post {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
     data['id'] = this.id;
+    data['permalink_url'] = this.permalinkURL;
+    data['created_time'] = this.createdTime;
     data['full_picture'] = this.fullPicture;
     return data;
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
 class LocationScreen extends StatefulWidget {
   @override
   _LocationScreenState createState() => _LocationScreenState();
@@ -55,58 +54,34 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
-      child:  Scaffold(
-          appBar: AppBar(
-            title: Text('Location'),
-            leading: IconButton(
-            icon: Image.asset('assets/cmbt.png'), 
-            onPressed: () { },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Location'),
+          leading: IconButton(
+            icon: Image.asset('assets/cmbt.png'),
+            onPressed: () {},
           ),
+        ),
+        body: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 11.0,
           ),
-          body:Container(
-      // color: Colors.blueGrey,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    width: 250.0,
-                    height: 250.0,
-                    margin: EdgeInsets.only(top: 20.0),
-                    child: GoogleMap(
-                      onMapCreated: _onMapCreated,
-                      initialCameraPosition: CameraPosition(
-                        target: _center,
-                        zoom: 11.0,
-                      ),
-                      markers: {
-                        Marker(
-                          markerId: MarkerId("cmbt_office"),
-                          position: _center,
-                          infoWindow: InfoWindow(
-                            title: 'Cmbt Office',
-                            snippet: 'Ahedrias',
-                          ),
-                          icon: BitmapDescriptor.defaultMarker,
-                        )
-                      },
-                    ),
-                  ),
-                  
-                ],
+          markers: {
+            Marker(
+              markerId: MarkerId("cmbt_office"),
+              position: _center,
+              infoWindow: InfoWindow(
+                title: 'Cmbt Office',
+                snippet: 'Ahedrias',
               ),
-            ),
-          ),
-        ],
-      ),
-          ),
+              icon: BitmapDescriptor.defaultMarker,
+            )
+          },
+        ),
       ),
     );
   }
 }
-

@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-
 final _imageUrls = [
   "https://live.tourofcrete.gr/images/cmbt-gallery/1.jpg",
   "https://live.tourofcrete.gr/images/cmbt-gallery/2.jpg",
@@ -83,46 +82,30 @@ class GalleryScreen extends StatefulWidget {
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
-  
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
-      child:  Scaffold(
-          appBar: AppBar(
-            title: Text('Gallery'),
-            leading: IconButton(
-            icon: Image.asset('assets/cmbt.png'), 
-            onPressed: () { },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Gallery'),
+          leading: IconButton(
+            icon: Image.asset('assets/cmbt.png'),
+            onPressed: () {},
           ),
-          ),
-          body:Container(
-      // color: Colors.blueGrey,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  
-                  Container(
-                      child: CarouselSlider(
-                    options: CarouselOptions(
-                      aspectRatio: 2.0,
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                      autoPlay: true,
-                    ),
-                    items: imageSliders,
-                  )),
-                ],
-              ),
+        ),
+        body: Container(
+          // color: Colors.blueGrey,
+          child: Center(
+              child: CarouselSlider(
+            options: CarouselOptions(
+              aspectRatio: 1.8,
+              enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+              autoPlay: true,
             ),
-          ),
-        ],
-      ),
-          ),
+            items: imageSliders,
+          )),
+        ),
       ),
     );
   }
