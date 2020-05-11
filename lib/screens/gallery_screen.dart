@@ -91,7 +91,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
           appBar: AppBar(
             title: Text('Gallery'),
             leading: IconButton(
-            icon: Image.asset('images/cmbt.png'), 
+            icon: Image.asset('assets/cmbt.png'), 
             onPressed: () { },
           ),
           ),

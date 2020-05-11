@@ -74,7 +74,7 @@ class _PostsListViewState extends State<PostsListView> {
         appBar: AppBar(
           title: Text('News'),
           leading: IconButton(
-            icon: Image.asset('images/cmbt.png'), 
+            icon: Image.asset('assets/cmbt.png'), 
             onPressed: () { },
           ),
         ),

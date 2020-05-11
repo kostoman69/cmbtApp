@@ -60,7 +60,7 @@ class _LocationScreenState extends State<LocationScreen> {
           appBar: AppBar(
             title: Text('Location'),
             leading: IconButton(
-            icon: Image.asset('images/cmbt.png'), 
+            icon: Image.asset('assets/cmbt.png'), 
             onPressed: () { },
           ),
           ),

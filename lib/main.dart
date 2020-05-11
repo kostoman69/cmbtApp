@@ -7,6 +7,7 @@ import 'package:custom_navigator/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
 void main() => runApp(CmbtApp());
 
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
@@ -43,24 +44,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  
   final _items = [
-    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.home), title: Text('home')),
-    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.route), title: Text('live')),
-    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.newspaper), title: Text('News')),
+    BottomNavigationBarItem(
+        icon: FaIcon(FontAwesomeIcons.home), title: Text('home')),
+    BottomNavigationBarItem(
+        icon: FaIcon(FontAwesomeIcons.route), title: Text('live')),
+    BottomNavigationBarItem(
+        icon: FaIcon(FontAwesomeIcons.newspaper), title: Text('News')),
     BottomNavigationBarItem(
         icon: FaIcon(FontAwesomeIcons.images), title: Text('Gallery')),
-        BottomNavigationBarItem(
+    BottomNavigationBarItem(
         icon: FaIcon(FontAwesomeIcons.mapMarkedAlt), title: Text('Location')),
   ];
+
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: CustomScaffold(
         scaffold: Scaffold(
-          bottomNavigationBar:  BottomNavigationBar(
-              items: _items,
-            ),
-        
+          bottomNavigationBar: BottomNavigationBar(
+            items: _items,
+          ),
+          
         ),
         children: <Widget>[
           HomeScreen(),

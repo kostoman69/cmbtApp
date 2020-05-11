@@ -14,7 +14,7 @@ class LiveScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text('Live race monitoring'),
             leading: IconButton(
-            icon: Image.asset('images/cmbt.png'), 
+            icon: Image.asset('assets/cmbt.png'), 
             onPressed: () { },
           ),
           ),
@@ -25,7 +25,7 @@ class LiveScreen extends StatelessWidget {
           Stack(
             children: <Widget>[
               IconButton(
-                icon: Image.asset('images/liveview.jpg'),
+                icon: Image.asset('assets/liveview.jpg'),
                 iconSize: 160,
                 onPressed: () => null,
               ),
@@ -55,7 +55,7 @@ class LiveScreen extends StatelessWidget {
           Stack(
             children: <Widget>[
               IconButton(
-                icon: Image.asset('images/liverankings.jpg'),
+                icon: Image.asset('assets/liverankings.jpg'),
                 iconSize: 170,
                 onPressed: () => null,
               ),
@@ -85,7 +85,7 @@ class LiveScreen extends StatelessWidget {
           Row(
             children: <Widget>[
               IconButton(
-                icon: Image.asset('images/vodafone.png'),
+                icon: Image.asset('assets/vodafone.png'),
                 iconSize: 100,
                 onPressed: () => null,
               ),
