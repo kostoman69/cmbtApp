@@ -7,7 +7,6 @@ import 'package:custom_navigator/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 void main() => runApp(CmbtApp());
 
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
@@ -21,14 +20,14 @@ class CmbtApp extends StatelessWidget {
       navigatorKey: mainNavigatorKey,
       title: 'CMBT',
       theme: ThemeData(
-        //primarySwatch: Colors.orange,
+        primarySwatch: Colors.orange,
         brightness: Brightness.dark,
 
         //primaryTextTheme: TextTheme(
         //  title: TextStyle(color: Colors.white),
         //),
       ),
-      home: HomePage(title: 'Cretan Mountain Bike Trails'),
+      home: HomePage(title: 'Asterousia Trails'),
     );
   }
 }
@@ -44,21 +43,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  
-  final _items = [
-    BottomNavigationBarItem(
-        icon: FaIcon(FontAwesomeIcons.home), title: Text('home')),
-    BottomNavigationBarItem(
-        icon: FaIcon(FontAwesomeIcons.route), title: Text('live')),
-    BottomNavigationBarItem(
-        icon: FaIcon(FontAwesomeIcons.newspaper), title: Text('News')),
-    BottomNavigationBarItem(
-        icon: FaIcon(FontAwesomeIcons.images), title: Text('Gallery')),
-    BottomNavigationBarItem(
-        icon: FaIcon(FontAwesomeIcons.mapMarkedAlt), title: Text('Location')),
-  ];
 
-  
+  final _items = [
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.home), title: Text('Home')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.route), title: Text('Live')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.newspaper), title: Text('News')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.images), title: Text('Gallery')),
+    BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.mapMarkedAlt), title: Text('Location')),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +60,13 @@ class _HomePageState extends State<HomePage> {
           bottomNavigationBar: BottomNavigationBar(
             items: _items,
           ),
-          
         ),
         children: <Widget>[
           HomeScreen(),
           LiveScreen(),
           NewsScreen(),
           GalleryScreen(),
-          LocationScreen()
+          LocationScreen(),
         ],
 
         // Called when one of the [items] is tapped.

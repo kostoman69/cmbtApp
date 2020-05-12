@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key, this.title}) : super(key: key);
 
@@ -35,36 +34,102 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _titleStyle = TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.bold,
+      color: Colors.orange,
+      shadows: [
+        Shadow(
+          blurRadius: 10.0,
+          color: Colors.black,
+          offset: Offset(10.0, 10.0),
+        ),
+      ],
+    );
+    final _titleStyleL = TextStyle(
+      fontSize: 46,
+      fontWeight: FontWeight.bold,
+      color: Colors.orange,
+      shadows: [
+        Shadow(
+          blurRadius: 10.0,
+          color: Colors.black,
+          offset: Offset(10.0, 10.0),
+        ),
+      ],
+    );
+
     return SafeArea(
-      child:  Scaffold(
+      child: Scaffold(
         extendBodyBehindAppBar: true,
-     //   appBar: CustomRoundedAppBar(100.0, "kakak"),
-//         AppBar(
-// //        backgroundColor: Colors.transparent,
-//         backgroundColor: Color(0x44000000),
-//         elevation: 0,
-//         title: Text("Title"),
-//       ),
-          appBar: AppBarWithHeight(
-            height: 150.0,
-            title: 'Asterousia Trails',
-          ),
-          body: Stack(
-            children: <Widget>[
-              SizedBox.expand(
-                child: FittedBox(
-                  // If your background video doesn't look right, try changing the BoxFit property.
-                  // BoxFit.fill created the look I was going for.
-                  fit: BoxFit.fill,
-                  child: SizedBox(
-                    width: _controller.value.size?.width ?? 0,
-                    height: _controller.value.size?.height ?? 0,
-                    child: VideoPlayer(_controller),
-                  ),
+        appBar: AppBarWithHeight(
+          height: 120.0,
+          title: 'Asterousia Trails',
+        ),
+        body: Stack(
+          children: <Widget>[
+            SizedBox.expand(
+              child: FittedBox(
+                // If your background video doesn't look right, try changing the BoxFit property.
+                // BoxFit.fill created the look I was going for.
+                fit: BoxFit.fill,
+                child: SizedBox(
+                  width: _controller.value.size?.width ?? 0,
+                  height: _controller.value.size?.height ?? 0,
+                  child: VideoPlayer(_controller),
                 ),
               ),
-            ],
-          ),
+            ),
+            Container(
+              alignment: Alignment(1, 0.6),
+              child: Container(
+                padding: EdgeInsets.only(right: 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                        child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text("C", style: _titleStyleL),
+                        Text("retan", style: _titleStyle),
+                      ],
+                    )),
+                    Container(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text("M", style: _titleStyleL),
+                            Text("ountain", style: _titleStyle),
+                          ],
+                        )),
+                    Container(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text("B", style: _titleStyleL),
+                            Text("ike", style: _titleStyle),
+                          ],
+                        )),
+                    Container(
+                        padding: EdgeInsets.only(left: 30),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text("T", style: _titleStyleL),
+                            Text("rails", style: _titleStyle),
+                          ],
+                        )),
+                  ],
+                ),
+                //padding: EdgeInsets.only(left: 50),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -74,27 +139,25 @@ class AppBarWithHeight extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String title;
 
-  const AppBarWithHeight({Key key, @required this.height,@required this.title}) : super(key: key);
+  const AppBarWithHeight({Key key, @required this.height, @required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
       opacity: 0.8,
-          child: Container(
+      child: Container(
         color: Colors.blueGrey[800],
-//color: Color(0x44000000),
-//         elevation: 0,
-        padding: EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(2.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               'assets/cmbt.png',
               fit: BoxFit.contain,
-              height: 90,
+              height: 80,
             ),
             Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Text(
                   this.title,
                   style: TextStyle(fontSize: 17.0),
@@ -107,69 +170,4 @@ class AppBarWithHeight extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(height);
-}
-
-
-
-class CustomRoundedAppBar extends StatelessWidget {
-  double height = 100;
-  final String title;
-
-  CustomRoundedAppBar(
-    this.height,
-    this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: Size(this.height, this.height),
-      child: AnimatedContainer(
-        duration: Duration(seconds: 1),
-        height: this.height,
-        child: new LayoutBuilder(builder: (context, constraint){
-          final width =constraint.maxWidth * 8;
-          return new ClipRect(
-          child: Stack(
-            children: <Widget>[
-              new OverflowBox(
-                maxHeight: double.infinity,
-                maxWidth: double.infinity,
-                child: new SizedBox(
-                  width: width,
-                  height: width,
-                  child: new Padding(
-                    padding: new EdgeInsets.only(
-                      bottom: width / 2 - this.height / 3
-                      ),
-                    child: new DecoratedBox(
-                      decoration: new BoxDecoration(
-                        color: Colors.indigo,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          new BoxShadow(color: Colors.black54, blurRadius: 10.0)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              new Center(
-                child: new Text("${this.title}",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(color: Colors.black54, blurRadius: 10.0)
-                    ]
-                  ),
-                )
-              ),
-            ],
-          )
-        );
-        })
-      ),
-    );
-  }
 }

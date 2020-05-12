@@ -119,6 +119,10 @@ final List<Widget> imageSliders = _imageUrls
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: Stack(
                   children: <Widget>[
+                    //
+                    // TODO
+                    // Since I am loading the image over the network, one possible improvement is to use the FadeInImage widget so that an image placeholder could be presented
+                    // until the actual image is loaded from the network.
                     Image.network(item, fit: BoxFit.cover, width: 1000.0),
                     Positioned(
                       bottom: 0.0,

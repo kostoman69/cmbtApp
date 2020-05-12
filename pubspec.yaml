@@ -57,6 +57,7 @@ flutter:
     - assets/liveview.jpg
     - assets/vodafone.png
     - assets/waterfall.mp4
+    - assets/waterfall_soft_black.jpg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
