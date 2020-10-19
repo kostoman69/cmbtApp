@@ -31,6 +31,10 @@
 /build/
 *.lock
 
+# Generated Dart files  
+**/*.g.dart
+**/*.iconfig.dart
+
 # Web related
 lib/generated_plugin_registrant.dart
 
