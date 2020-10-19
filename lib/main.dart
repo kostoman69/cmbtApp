@@ -1,3 +1,4 @@
+import 'package:cmbt/app/router.gr.dart';
 import 'package:cmbt/ui/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
       home: HomeView(),
       // initialRoute: Routes.startupViewRoute,
       //onGenerateRoute: Router().onGenerateRoute,
+      initialRoute: Routes.homeView,
+      onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: locator<DialogService>().navigatorKey,
     );
   }

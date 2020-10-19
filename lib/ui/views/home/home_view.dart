@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:cmbt/ui/views/gallery/gallery_view.dart';
+import 'package:cmbt/ui/views/live/live_view.dart';
 import 'package:cmbt/ui/views/location/location_view.dart';
 import 'package:cmbt/ui/views/logo/logo_view.dart';
 import 'package:cmbt/ui/views/news/new_view.dart';
@@ -42,6 +43,10 @@ class HomeView extends StatelessWidget {
               icon: FaIcon(FontAwesomeIcons.home),
             ),
             BottomNavigationBarItem(
+              title: Text('Live'),
+              icon: FaIcon(FontAwesomeIcons.route),
+            ),
+            BottomNavigationBarItem(
               title: Text('News'),
               icon: FaIcon(FontAwesomeIcons.newspaper),
             ),
@@ -65,10 +70,12 @@ class HomeView extends StatelessWidget {
       case 0:
         return LogoView();
       case 1:
-        return NewsView();
+        return LiveView();
       case 2:
-        return GalleryView();
+        return NewsView();
       case 3:
+        return GalleryView();
+      case 4:
         return LocationView();
       default:
         return LogoView();

@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:cmbt/screens/web_screen.dart';
+import 'package:cmbt/ui/views/live/web_screen.dart';
+import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../main.dart';
+import 'live_viewmodel.dart';
 
-class LiveScreen extends StatelessWidget {
+class LiveView extends StatelessWidget {
   final String traccarURI = 'http://live.tourofcrete.gr:8080/?locale=en&token=X3TKrvKtjZKZwF3OT3ehWM6sdKUkTdTT';
   final String rankingURI = 'https://live.tourofcrete.gr/ranking/standings.php';
 
   @override
   Widget build(BuildContext context) {
+    return ViewModelBuilder<LiveViewModel>.nonReactive(
+      builder: (context, model, child) => SafeArea(
+        child: Scaffold(
+          body: _buildBoby(model),
+        ),
+      ),
+      viewModelBuilder: () => LiveViewModel(),
+    );
+  }
+
+  Widget _buildBoby(LiveViewModel model) {
     return SafeArea(
       child: Container(
         decoration: BoxDecoration(
@@ -50,14 +62,14 @@ class LiveScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                             onTap: () {
                               print('liveview!');
-                              Route route = MaterialPageRoute(
-                                builder: (context) => WebScreen(
-                                  url: traccarURI,
-                                  title: 'Live View',
-                                ),
-                              );
-                              //Navigator.push(context, route);
-                              mainNavigatorKey.currentState.push(route);
+                              // Route route = MaterialPageRoute(
+                              //   builder: (context) => WebScreen(
+                              //     url: traccarURI,
+                              //     title: 'Live View',
+                              //   ),
+                              // );
+                              // //Navigator.push(context, route);
+                              // mainNavigatorKey.currentState.push(route);
                             },
                           ),
                         ),
@@ -80,14 +92,14 @@ class LiveScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                             onTap: () {
                               print('liveview!');
-                              Route route = MaterialPageRoute(
-                                builder: (context) => WebScreen(
-                                  url: rankingURI,
-                                  title: 'Rankings',
-                                ),
-                              );
-                              //Navigator.push(context, route);
-                              mainNavigatorKey.currentState.push(route);
+                              // Route route = MaterialPageRoute(
+                              //   builder: (context) => WebScreen(
+                              //     url: rankingURI,
+                              //     title: 'Rankings',
+                              //   ),
+                              // );
+                              // //Navigator.push(context, route);
+                              // mainNavigatorKey.currentState.push(route);
                             },
                           ),
                         ),
@@ -101,7 +113,7 @@ class LiveScreen extends StatelessWidget {
                       IconButton(
                         icon: Image.asset('assets/vodafone.png'),
                         iconSize: 100,
-                        onPressed: () => _launchURL('https://www.vodafone.gr/'),
+                        onPressed: () => model.launchExternalBrowser('https://www.vodafone.gr/'),
                       ),
                     ],
                   ),
@@ -115,10 +127,10 @@ class LiveScreen extends StatelessWidget {
   }
 }
 
-_launchURL(url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+// _launchURL(url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
