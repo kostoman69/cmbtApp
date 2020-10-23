@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cmbt/ui/views/live/web_screen.dart';
+import 'package:cmbt/ui/views/live/web_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -70,6 +70,7 @@ class LiveView extends StatelessWidget {
                               // );
                               // //Navigator.push(context, route);
                               // mainNavigatorKey.currentState.push(route);
+                              model.navigateToWebView(traccarURI, 'Live View');
                             },
                           ),
                         ),
@@ -100,6 +101,7 @@ class LiveView extends StatelessWidget {
                               // );
                               // //Navigator.push(context, route);
                               // mainNavigatorKey.currentState.push(route);
+                              model.navigateToWebView(rankingURI, 'Rankings');
                             },
                           ),
                         ),
